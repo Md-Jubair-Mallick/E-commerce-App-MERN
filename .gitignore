@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 
+# files
+favicon.ico
+App.test.js
+reportWebVitals.js
+setupTests.js
+
 # testing
 /coverage
 
