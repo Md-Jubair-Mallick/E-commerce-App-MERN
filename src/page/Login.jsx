@@ -1,10 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
   return (
     <>
-        
-
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
@@ -83,7 +82,7 @@ export default function Login() {
             <p className="mt-5 text-center text-sm text-gray-900 text-lg">
                 Not a member?{' '}
               {/* link */}
-              <a href='#' className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Create an Account</a>
+              <Link to='/signup' className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Create an Account</Link>
             </p>    
           </div>
         </div>
