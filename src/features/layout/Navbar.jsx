@@ -2,31 +2,46 @@ import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-const user = {
+let  user = {
     name: 'Tom Cook',
     email: 'tom@example.com',
-    imageUrl:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    imageUrl:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   }
   const navigation = [
     { name: 'Home', href:'/', current: true },
     { name: 'Products', href:'/product-details', current: false },
     { name: 'Contact', href: '/contact', current: false },
-    { name: 'About', href: 'about', current: false },
-    { name: 'Reports', href: 'reports', current: false },
+    { name: 'About', href: '/about', current: false },
+    { name: 'Reports', href: '/reports', current: false },
   ]
-  const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
-  ]
-  
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
 export default function Navbar({children}) {
+  const { loggedInUser } = useSelector((state) =>  state.user)
+  console.log(loggedInUser)
+  let arr;
+  if(!loggedInUser){
+    arr = { name: 'Log In', href:'/login'};
+    
+  }else{
+    arr = { name: 'Sign out', href: '/signout'}
+    user = {
+      name : loggedInUser.userName,
+      email : loggedInUser.email,
+      imageUrl : loggedInUser.imageUrl,
+    }
+  }
+  const userNavigation = [
+    { name: 'Your Profile', href: '#' },
+    { name: 'Settings', href: '#' },
+    arr
+  ]
+
   return (
     <>
     <div className="min-h-full">
@@ -46,9 +61,9 @@ export default function Navbar({children}) {
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
-                          <a
+                          <Link
                             key={item.name}
-                            href={item.href}
+                            to={item.href}
                             className={classNames(
                               item.current
                                 ? 'bg-gray-900 text-white'
@@ -58,7 +73,7 @@ export default function Navbar({children}) {
                             aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -98,15 +113,15 @@ export default function Navbar({children}) {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a
-                                    href={item.href}
+                                  <Link
+                                    to={item.href}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
                                     )}
                                   >
                                     {item.name}
-                                  </a>
+                                  </Link>
                                 )}
                               </Menu.Item>
                             ))}
@@ -171,8 +186,8 @@ export default function Navbar({children}) {
                     {userNavigation.map((item) => (
                       <Disclosure.Button
                         key={item.name}
-                        as="a"
-                        href={item.href}
+                        as="Link"
+                        to={item.href}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
                         {item.name}
