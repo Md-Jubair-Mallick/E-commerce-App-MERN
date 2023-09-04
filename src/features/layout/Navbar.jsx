@@ -4,11 +4,6 @@ import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outl
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-let  user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  }
   const navigation = [
     { name: 'Home', href:'/', current: true },
     { name: 'Products', href:'/product-details', current: false },
@@ -23,24 +18,25 @@ let  user = {
 
 export default function Navbar({children}) {
   const { loggedInUser } = useSelector((state) =>  state.user)
-  console.log(loggedInUser)
-  let arr;
+  // console.log(loggedInUser)
+  let user, userNavigation;
   if(!loggedInUser){
-    arr = { name: 'Log In', href:'/login'};
-    
+    userNavigation = [
+    { name: 'Log In', href:'/login'}
+    ]
   }else{
-    arr = { name: 'Sign out', href: '/signout'}
+    userNavigation = [
+      { name: 'My Profile', href: '/profile' },
+      { name: 'Settings', href: '#' },
+      { name: 'Sign out', href: '/signout'}
+    ]
     user = {
       name : loggedInUser.userName,
       email : loggedInUser.email,
-      imageUrl : loggedInUser.imageUrl,
+      imageUrl : loggedInUser.imageUrl[1],
     }
   }
-  const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
-    arr
-  ]
+  
 
   return (
     <>
@@ -97,7 +93,7 @@ export default function Navbar({children}) {
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="absolute -inset-1.5" />
                             <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                            {loggedInUser && <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />}
                           </Menu.Button>
                         </div>
                         <Transition
@@ -164,13 +160,13 @@ export default function Navbar({children}) {
                 </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                  <div className="flex-shrink-0">
+                  {loggedInUser && <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />}
                     </div>
-                    <div className="ml-3">
+                    {loggedInUser && <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">{user.name}</div>
                       <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
-                    </div>
+                    </div>}
                     <Link to='/cart'>
                     <button
                       type="button"
@@ -190,7 +186,6 @@ export default function Navbar({children}) {
                         to={item.href}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
-                        {item.name}
                       </Disclosure.Button>
                     ))}
                   </div>

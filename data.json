@@ -555,11 +555,24 @@
   ],
   "users": [
     {
+      "id": 1,
+      "userName" : "jubairnewsat",
       "email": "mallickblogger@gmail.com",
       "password": "Jubair1234",
-      "userName" : "jubairnewsat",
-      "imageUrl" : "https://static.vecteezy.com/system/resources/thumbnails/022/448/292/small/save-earth-day-poster-environment-day-nature-green-ai-generative-glossy-background-images-tree-and-water-free-photo.jpg",
-      "id": 1
+      "imageUrl" : [
+        "https://static.vecteezy.com/system/resources/thumbnails/022/448/292/small/save-earth-day-poster-environment-day-nature-green-ai-generative-glossy-background-images-tree-and-water-free-photo.jpg",
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+      ],
+      "address" : [
+        {
+          "country" : "Bangladesh",
+          "city" : "Chittagong",
+          "state" : "Hallishahar Housing State",
+          "street" : 1,
+          "lain" : 9,
+          "block" : "I"
+        }
+    ]
     }
   ]
 }

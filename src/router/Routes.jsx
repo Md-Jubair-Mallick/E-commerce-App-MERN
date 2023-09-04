@@ -7,17 +7,17 @@ import Checkout from '../pages/Checkout'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 import ProductDetails from '../pages/ProductDetails'
-import Protected from '../features/auth/components/Protected'
+import UserProfile from '../features/user/components/UserProfile'
 
 const router = createBrowserRouter([
     { path : '/', element : <Home />  },
-    { path : '/cart', element : <Protected><Cart /></Protected> },
-    { path : '/checkout', element : <Protected><Checkout /></Protected> },
+    { path : '/cart', element :<><Cart /></> },
+    { path : '/checkout', element : <><Checkout /></> },
     { path : '/login', element : <Login /> },
     { path : '/signup', element : <Signup /> },
-    { path : '/product-details', element : <Protected><ProductDetails /></Protected> },
+    { path : '/product-details/:id', element : <><ProductDetails /></> },
     { path : '*', element : <Error /> },
-    // { path : '*', element : <Error /> },
+    { path : '/profile', element : <UserProfile /> },
     // { path : '*', element : <Error /> },
     // { path : '*', element : <Error /> },
 ])

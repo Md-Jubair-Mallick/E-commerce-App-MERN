@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetch } from '../productSlice';
+import { fetchProductsAsync } from '../productSlice';
 import { Link } from 'react-router-dom'
 export default function ProductsList() {
   const { products , isLoading, error } = useSelector((state) => state.product);
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetch())
+    dispatch(fetchProductsAsync())
   }, [dispatch])
 
   return (
@@ -19,7 +19,7 @@ export default function ProductsList() {
             { isLoading && <h1>Loading....</h1> }
             { error && <h1>{error}</h1> }
             { products && products.map((product) => (
-              <Link to={`/product-details/:${product.id}`} key={product.id}>
+              <Link to={`/product-details/${product.id}`} key={product.id}>
               <div  className="group relative">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img

@@ -9,6 +9,7 @@ export default function Home() {
       <Navbar>
         <Layout >
           <Pagination />
+          <p>json-server --watch data.json --port 8080</p>
         </Layout>
       </Navbar>
     </div>
